@@ -1,6 +1,14 @@
 const Shimmer = () => {
     return (
-        <h1>Shimmer Ui is loading 🔃🔃🔃🔃🔃</h1>
+
+        <div className="restraunt-list">
+            {
+                Array(20).fill(0).map((elem,index) => {
+                    return <div className="shimmer-card" index={index}></div>
+                })
+            }
+        </div>
+
     )
 }
 

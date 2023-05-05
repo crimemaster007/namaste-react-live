@@ -1,12 +1,14 @@
 import { useState } from "react"
+import Logo from "../assets/img/foodVilla.png"
+import { Link } from "react-router-dom";
+
 const loggedInUser = () => {
     return false;
 }
 
 export const Title = () => (
     <a href="/">
-        <img alt="logo" className="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTth54M7VygQniIZiCnTbdJ-NZjo8myuDB3tHf7thEJLxcOSfm20WEiCeJduUxCkk5GqAA&usqp=CAU" />
-
+        <img alt="logo" className="logo" src={Logo} />
     </a>
 )
 
@@ -17,9 +19,16 @@ export const Header = () => {
             <Title />
             <div className="nav-items">
                 <ul >
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Contact</li>
+                   
+                    <Link to="/">
+                        <li>Home</li>
+                    </Link>
+                    <Link to="/about">
+                        <li>About</li>
+                    </Link>
+                    <Link to="/contact">
+                        <li>Contact</li>
+                    </Link>
                     <li>Cart</li>
                 </ul>
             </div>
