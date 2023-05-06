@@ -3,15 +3,9 @@ import { restrauntList } from "../config.js";
 import { RestrauntCard } from "./RestrauntCard.js";
 import Shimmer from "./Shimmer.js";
 import { Link } from "react-router-dom";
+import { filterData } from "../Utils/Helper.js";
+import useOnline from "../utils/useOnline.js";
 
-function filterData(searchInput, restaurants) {
-
-    const filteredData = restaurants.filter((restaraunt) => {
-        return restaraunt?.data?.name?.toLowerCase()?.includes(searchInput?.toLowerCase())
-    });
-
-    return filteredData;
-}
 
 const Body = () => {
     const [allRestaurants, setAllRestaurants] = useState([]);
@@ -32,6 +26,12 @@ const Body = () => {
 
     console.log("render");
 
+    const isOnline = useOnline();
+
+    if (!isOnline) {
+        return <h1>🔴Offline, Please check your internet connection!!</h1>;
+    }
+
     if (!allRestaurants) return null;
 
     return (allRestaurants?.length === 0) ? <Shimmer /> : (
@@ -49,7 +49,7 @@ const Body = () => {
             </div>
             <div className="restraunt-list">
                 {filteredRestaurants.length === 0 ? (<h1>No restraunt matching your filter.</h1>) : (filteredRestaurants.map((restraunt) => {
-                    return  <Link to={"/restraunt/" + restraunt.data.id} key={restraunt.data.id}> <RestrauntCard {...restraunt.data} ></RestrauntCard></Link>
+                    return <Link to={"/restraunt/" + restraunt.data.id} key={restraunt.data.id}> <RestrauntCard {...restraunt.data} ></RestrauntCard></Link>
                 }))}
             </div>
         </>

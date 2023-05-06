@@ -6,11 +6,13 @@ const loggedInUser = () => {
     return false;
 }
 
+
 export const Title = () => (
     <a href="/">
         <img alt="logo" className="logo" src={Logo} />
     </a>
 )
+
 
 export const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -18,8 +20,7 @@ export const Header = () => {
         <div className="header">
             <Title />
             <div className="nav-items">
-                <ul >
-                   
+                <ul>
                     <Link to="/">
                         <li>Home</li>
                     </Link>
@@ -28,6 +29,9 @@ export const Header = () => {
                     </Link>
                     <Link to="/contact">
                         <li>Contact</li>
+                    </Link>
+                    <Link to="/instamart">
+                        <li>InstaMart</li>
                     </Link>
                     <li>Cart</li>
                 </ul>
