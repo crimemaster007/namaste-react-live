@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import Logo from "../assets/img/foodVilla.png"
 import { Link } from "react-router-dom";
-
+import UserContext from "../utils/UserContext.js";
+import useOnline from "../utils/useOnline.js";
 const loggedInUser = () => {
     return false;
 }
@@ -15,7 +16,11 @@ export const Title = () => (
 
 
 export const Header = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const isOnline = useOnline();
+    const { user } = useContext(UserContext);
+
     return (
         <div className="flex justify-between bg-[#171a29] text-white shadow-lg">
             <Title />
@@ -36,10 +41,12 @@ export const Header = () => {
                     <li className="px-2">Cart</li>
                 </ul>
             </div>
+
+            <h1 className="p-10 ml-36   font-bold text-[#E78D48]">{user.name}{isOnline ? "🟢" : "🔴"}</h1>
             {isLoggedIn ?
-                (<button onClick={() => { setIsLoggedIn(false) }}>logout</button>)
+                (<button className="mr-6 p-10" onClick={() => { setIsLoggedIn(false) }}>logout</button>)
                 :
-                (<button onClick={() => { setIsLoggedIn(true) }} >login</button>)
+                (<button className="mr-6 p-10" onClick={() => { setIsLoggedIn(true) }} >login</button>)
             }
         </div >
     );

@@ -1,16 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { restrauntList } from "../config.js";
 import { RestrauntCard } from "./RestrauntCard.js";
 import Shimmer from "./Shimmer.js";
 import { Link } from "react-router-dom";
 import { filterData } from "../Utils/Helper.js";
 import useOnline from "../utils/useOnline.js";
+import UserContext from "../utils/UserContext.js";
 
 
 const Body = () => {
     const [allRestaurants, setAllRestaurants] = useState([]);
     const [filteredRestaurants, setFilteredRestaurants] = useState([]);
     const [searchInput, setSearchInput] = useState("");
+    const {user,setUser} = useContext(UserContext);
+
 
     useEffect(() => {
         getRestaurants();
@@ -46,6 +49,15 @@ const Body = () => {
                         setFilteredRestaurants(dataD);
                     }
                 }>Search</button>
+                <input
+                    value={user.name}
+                    onChange={(e) => {
+                        setUser({
+                            name:e.target.value
+                        })
+                    }}
+                    className="p-2 border-solid border-2 border-gray-500 rounded-xl focus:bg-gray-100 focus:border-gray-950"
+                />
             </div>
             <div className="flex flex-wrap">
                 {filteredRestaurants.length === 0 ? (<h1>No restraunt matching your filter.</h1>) : (filteredRestaurants.map((restraunt) => {

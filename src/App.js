@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { Header } from "./components/Header.js";
 import Body from "./components/Body.js";
@@ -9,6 +9,7 @@ import RestrauntMenu from "./components/RestrauntMenu.js";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Profile from "./components/Profile.js";
 import Shimmer from "./components/Shimmer.js";
+import UserContext from "./utils/UserContext.js";
 
 
 //lazy loading
@@ -18,11 +19,24 @@ const About = lazy(() => import("./components/About.js"))
 
 
 const AppLayout = () => {
+
+    const [user, setUser] = useState({
+        name: "Tushar Kumar Singh",
+        email: "prachand9211@gmail.com"
+    });
+
+
     return (
+
         <>
-            <Header />
-            <Outlet />
-            <Footer />
+            <UserContext.Provider value={{
+                user: user,
+                setUser:setUser,
+            }}>
+                <Header />
+                <Outlet />
+                <Footer />
+            </UserContext.Provider>
         </>
     );
 };
