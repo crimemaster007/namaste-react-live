@@ -9,7 +9,7 @@ const loggedInUser = () => {
 
 export const Title = () => (
     <a href="/">
-        <img alt="logo" className="logo" src={Logo} />
+        <img alt="logo" className="h-28 p-2 rounded-xl" src={Logo} />
     </a>
 )
 
@@ -17,23 +17,23 @@ export const Title = () => (
 export const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     return (
-        <div className="header">
+        <div className="flex justify-between bg-[#171a29] text-white shadow-lg">
             <Title />
-            <div className="nav-items">
-                <ul>
+            <div className="">
+                <ul className="flex py-10">
                     <Link to="/">
-                        <li>Home</li>
+                        <li className="px-2">Home</li>
                     </Link>
                     <Link to="/about">
-                        <li>About</li>
+                        <li className="px-2">About</li>
                     </Link>
                     <Link to="/contact">
-                        <li>Contact</li>
+                        <li className="px-2">Contact</li>
                     </Link>
                     <Link to="/instamart">
-                        <li>InstaMart</li>
+                        <li className="px-2">Instamart</li>
                     </Link>
-                    <li>Cart</li>
+                    <li className="px-2">Cart</li>
                 </ul>
             </div>
             {isLoggedIn ?
