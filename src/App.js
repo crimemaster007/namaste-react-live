@@ -10,6 +10,10 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Profile from "./components/Profile.js";
 import Shimmer from "./components/Shimmer.js";
 import UserContext from "./utils/UserContext.js";
+import { Provider } from "react-redux";
+import store from "./utils/store.js";
+import Cart from "./components/Cart.js";
+
 
 
 //lazy loading
@@ -26,18 +30,20 @@ const AppLayout = () => {
     });
 
 
+    
+
     return (
 
-        <>
+        <Provider store={store}>
             <UserContext.Provider value={{
                 user: user,
-                setUser:setUser,
+                setUser: setUser,
             }}>
                 <Header />
                 <Outlet />
                 <Footer />
             </UserContext.Provider>
-        </>
+        </Provider>
     );
 };
 
@@ -72,6 +78,10 @@ const appRouter = createBrowserRouter([
             {
                 path: "/instamart",
                 element: <Suspense fallback={<Shimmer />} ><InstaMart /></Suspense>
+            },
+            {
+                path: "/cart",
+                element: <Cart />
             },
         ],
     },

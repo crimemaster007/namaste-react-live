@@ -3,6 +3,9 @@ import Logo from "../assets/img/foodVilla.png"
 import { Link } from "react-router-dom";
 import UserContext from "../utils/UserContext.js";
 import useOnline from "../utils/useOnline.js";
+import { useSelector } from "react-redux";
+
+
 const loggedInUser = () => {
     return false;
 }
@@ -20,6 +23,10 @@ export const Header = () => {
 
     const isOnline = useOnline();
     const { user } = useContext(UserContext);
+    const cartItems = useSelector(store => store.cart.items);
+
+    console.log(cartItems);
+
 
     return (
         <div className="flex justify-between bg-[#171a29] text-white shadow-lg">
@@ -38,7 +45,9 @@ export const Header = () => {
                     <Link to="/instamart">
                         <li className="px-2">Instamart</li>
                     </Link>
-                    <li className="px-2">Cart</li>
+                    <Link to="/cart">
+                        <li className="px-2">Cart-{cartItems.length}</li>
+                    </Link>
                 </ul>
             </div>
 
