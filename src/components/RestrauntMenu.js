@@ -33,7 +33,7 @@ const RestrauntMenu = () => {
             </div>
             <div>
                 <h1 className="font-bold">Menu</h1>
-                <ul>
+                <ul data-testid="menu">
                     {restaurant[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards
                         .slice(1)
                         .map((items, index) => {
@@ -43,7 +43,7 @@ const RestrauntMenu = () => {
                                         return (
                                             <li className="flex items-center" key={item?.card?.info?.id} >
                                                 <h2>{item?.card?.info?.name}</h2>
-                                                <button className="p-1 m-2 bg-green-400 rounded-xl w-20" onClick={() => addFoodItem(item?.card?.info)}
+                                                <button data-testid="addBtn" className="p-1 m-2 bg-green-400 rounded-xl w-20" onClick={() => addFoodItem(item?.card?.info)}
                                                 >Add</button>
                                             </li>
                                         );
